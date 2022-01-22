@@ -39,8 +39,8 @@ load lenet_pretrained.mat
 
 param_winc = params;
 for l_idx = 1:length(layers)-1
-    param_winc{l_idx}.w = zeros(size(param_winc{l_idx}.w));
-    param_winc{l_idx}.b = zeros(size(param_winc{l_idx}.b));
+	param_winc{l_idx}.w = zeros(size(param_winc{l_idx}.w));
+	param_winc{l_idx}.b = zeros(size(param_winc{l_idx}.b));
 end
 
 %% Training the network
@@ -51,21 +51,21 @@ ytrain = ytrain(:, new_order);
 curr_batch = 1;
 
 for iter = 1 : max_iter
-    
-    if (curr_batch > m_train) 
-        new_order = randperm(m_train);
-        xtrain = xtrain(:, new_order);
-        ytrain = ytrain(:, new_order);
-        curr_batch = 1;
-    end
-        
-    x_batch = xtrain(:, curr_batch:(curr_batch+batch_size-1));
-    y_batch = ytrain(:, curr_batch:(curr_batch+batch_size-1));
-    curr_batch = curr_batch + batch_size;
-    
-    [cp, param_grad] = conv_net(params, layers, x_batch, y_batch);
+	
+	if (curr_batch > m_train) 
+		new_order = randperm(m_train);
+		xtrain = xtrain(:, new_order);
+		ytrain = ytrain(:, new_order);
+		curr_batch = 1;
+	end
+		
+	x_batch = xtrain(:, curr_batch:(curr_batch+batch_size-1));
+	y_batch = ytrain(:, curr_batch:(curr_batch+batch_size-1));
+	curr_batch = curr_batch + batch_size;
+	
+	[cp, param_grad] = conv_net(params, layers, x_batch, y_batch);
 
-    for l_idx = 1:length(layers)-1
+	for l_idx = 1:length(layers)-1
 	% We have different epsilons for w and b. Calling get_lr and sgd_momentum twice.
 	w_rate = get_lr(iter, epsilon*w_lr, gamma, power);
 	[w_params, w_params_winc] = sgd_momentum(w_rate, mu, weight_decay, params, param_winc, param_grad);        
@@ -77,19 +77,19 @@ for iter = 1 : max_iter
 	params_winc{l_idx}.w = w_params_winc{l_idx}.w;
 	params{l_idx}.b = b_params{l_idx}.b;
 	params_winc{l_idx}.b = b_params_winc{l_idx}.b;
-    end
-    if mod(iter, display_interval) == 0
-        fprintf('cost = %f training_percent = %f\n', cp.cost, cp.percent);
-    end
-    if mod(iter, test_interval) == 0
-        layers{1}.batch_size = size(xtest, 2);
-        [cptest] = conv_net(params, layers, xtest, ytest);
-        layers{1}.batch_size = batch_size;
-        fprintf('test accuracy: %f \n\n', cptest.percent);
+	end
+	if mod(iter, display_interval) == 0
+		fprintf('cost = %f training_percent = %f\n', cp.cost, cp.percent);
+	end
+	if mod(iter, test_interval) == 0
+		layers{1}.batch_size = size(xtest, 2);
+		[cptest] = conv_net(params, layers, xtest, ytest);
+		layers{1}.batch_size = batch_size;
+		fprintf('test accuracy: %f \n\n', cptest.percent);
 
-    end
-    if mod(iter, snapshot) == 0
-        filename = 'lenet.mat';
-        save(filename, 'params');
-    end
+	end
+	if mod(iter, snapshot) == 0
+		filename = 'lenet.mat';
+		save(filename, 'params');
+	end
 end
