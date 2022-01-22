@@ -5,5 +5,5 @@ function [output] = relu_forward(input)
 	output.batch_size = input.batch_size;
 
 	% Replace the following line with your implementation.
-	output.data = zeros(size(input.data));
+	output.data = max(0, input.data);
 end
