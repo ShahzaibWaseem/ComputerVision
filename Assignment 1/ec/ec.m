@@ -1,3 +1,4 @@
+addpath("../matlab");
 % Network defintion
 layers = get_lenet();
 layers{1}.batch_size = 1;
