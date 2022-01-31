@@ -18,9 +18,10 @@ for i=1:100:size(xtest, 2)
 	actual = [actual, ytest(:, i:i+99)];
 	prediction = [prediction, pred];
 end
-
+set(gcf, "WindowState", "maximized");
 confusion = confusionmat(actual, prediction);
 disp(confusion);
 
-confusionchart(confusion);
+confusionchart(confusion, "RowSummary", "row-normalized", ...
+	"ColumnSummary", "column-normalized", "Title", "Confusion Matrix");
 saveas(gcf, "../results/confusion.png");
