@@ -13,6 +13,9 @@ for filenum = 1:numel(files)
 
 	f = figure();
 	f.WindowState = "maximized";
+	if filenum == 4
+		image = padarray(image, [0 5], "post");
+	end
 	imshow(image);
 
 	boxes = regionprops(image, "BoundingBox");
@@ -28,9 +31,9 @@ for filenum = 1:numel(files)
 		end
 
 		% dialating corner cases
-		if box == 41 || filenum == 2 || filenum == 4
+		if box == 41 || filenum == 4
 			x = imdilate(x, strel("square", 2));
-		elseif filenum == 1 || filenum == 3
+		elseif filenum == 2 || filenum == 3
 			x = imdilate(x, strel("square", 3));
 		end
 
