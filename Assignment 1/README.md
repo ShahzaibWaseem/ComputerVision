@@ -89,8 +89,7 @@ The fully connected or the inner product layer is the simplest layer which makes
 
 W, b are the weights and biases of the layer. W is a two dimensional matrix of m × n size where n is the dimensionality of the previous layer and m is the number of neurons in this layer. b is a vector with size m × 1.
 
-![](https://lh3.googleusercontent.com/sZI2zFkA-6AB0ZPDrThpfGDz_qeLM6Q9dqQTr087ay3MCq27SlAROghlZP8-Q9nySMODTOY1SxYKygpc3r0OUagg5_o3JdAPRC2Cw3wzOZu3obaX787Lk58RUpvBOjiEovyEtgNT)![](https://lh4.googleusercontent.com/53CzXyDkIwrzCDgmdsi_WUnuDT1OlNwLWB-6Scxgh_iNHpWyeG23ZZ0dtJFtrbn00l5cwfbbEAnqUrwqGp3rew7RZl-U4CF-ZCBb-RmicDLBo3nqsUdhs0cQr58pBOCMzPK48OGd)
-
+![](https://lh3.googleusercontent.com/sZI2zFkA-6AB0ZPDrThpfGDz_qeLM6Q9dqQTr087ay3MCq27SlAROghlZP8-Q9nySMODTOY1SxYKygpc3r0OUagg5_o3JdAPRC2Cw3wzOZu3obaX787Lk58RUpvBOjiEovyEtgNT)
 ## Convolutional Layer
 This is the fundamental building block of CNNs. Before we delve into what a convolution layer is, let's do a quick recap of convolution.
 
