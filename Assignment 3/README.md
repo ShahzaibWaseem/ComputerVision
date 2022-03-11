@@ -21,8 +21,8 @@ The goal of this assignment is to get hands-on experience in training deep convo
 ### Deep Learning Framework: PyTorch
 In this assignment, you will use PyTorch, which is currently one of the most popular deep learning programming frameworks and is very easy to pick up. It has a lot of tutorials and an active community answering questions on its discussion forums.
 
-### Detection Framework: Detectrone2
-Implementing a powerful object detection from scratch is hard and time consuming work. However, there are several open source frameworks in this regard which made it much easier to train and test the current famous detectors. In this assignment, you will use [Detectrone2](https://github.com/facebookresearch/detectron2) which is powered by PyTorch. You can find the full documentation in this [link](https://detectron2.readthedocs.io/). Part 1 has been adapted from a [Detectron2 Beginner’s Tutorial](https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5).
+### Detection Framework: Detectron2
+Implementing a powerful object detection from scratch is hard and time consuming work. However, there are several open source frameworks in this regard which made it much easier to train and test the current famous detectors. In this assignment, you will use [Detectron2](https://github.com/facebookresearch/detectron2) which is powered by PyTorch. You can find the full documentation in this [link](https://detectron2.readthedocs.io/). Part 1 has been adapted from a [Detectron2 Beginner’s Tutorial](https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5).
 
 #### Google Colab Setup
 
@@ -130,7 +130,7 @@ Suppose 73 students submitted, then top 10% mean that the ranking must be better
 Please report your number in the public leaderboard at the time of submission and also the ID which you use in Kaggle.
 
 # Part 4: Mask R-CNN [ 4pts ]
-In this part, you are supposed to use the implemented version of Mask R-CNN similar to the detection part from the Detectrone2 and compare with your results of Part 3. Use "[mask_rcnn_R_50_FPN_3x.yaml](https://github.com/facebookresearch/detectron2/blob/master/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml)" for your configs as well as the same tricks that you did to improve the results of your detector.
+In this part, you are supposed to use the implemented version of Mask R-CNN similar to the detection part from the Detectron2 and compare with your results of Part 3. Use "[mask_rcnn_R_50_FPN_3x.yaml](https://github.com/facebookresearch/detectron2/blob/master/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml)" for your configs as well as the same tricks that you did to improve the results of your detector.
 -   Provide the same visualization and evaluation for this part and compare the results.
 -   Explain the cons and pros of each method.    
 -   Check the detection results with the results of Part 1. How much are the results different? Explain which one you think is better and why?
@@ -143,7 +143,7 @@ Running Part 3 in the Colab notebook creates a pred.csv file in your Google Driv
 ### A few useful resources
 - [Detectron2 Beginner’s Tutorial](https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5)
 - [Creating shortcuts](https://support.google.com/drive/answer/9700156?hl=en&co=GENIE.Platform%3DDesktop) to your google drive
-- Full documentation of Detectrone2 in this [link](https://detectron2.readthedocs.io/).
+- Full documentation of Detectron2 in this [link](https://detectron2.readthedocs.io/).
 - This [post](https://towardsdatascience.com/understanding-semantic-segmentation-with-unet-6be4f42d4b47) is a helpful resource on understanding semantic segmentation with U-Net.
 - [Colab implementation](https://colab.research.google.com/github/usuyama/pytorch-unet/blob/master/pytorch_unet_resnet18_colab.ipynb) of U-Net using pytorch.
 - This [post](https://medium.com/analytics-vidhya/generating-masks-from-encoded-pixels-semantic-segmentation-18635e834ad0) explained the difference between segmentation-mask representations.
