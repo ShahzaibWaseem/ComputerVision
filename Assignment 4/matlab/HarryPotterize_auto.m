@@ -2,9 +2,9 @@
 clear all;
 close all;
 
-cv_img = imread('../data/cv_cover.jpg');
-desk_img = imread('../data/cv_desk.png');
-hp_img = imread('../data/hp_cover.jpg');
+cv_img = imread("../data/cv_cover.jpg");
+desk_img = imread("../data/cv_desk.png");
+hp_img = imread("../data/hp_cover.jpg");
 
 %% Extract features and match
 [locs1, locs2] = matchPics(cv_img, desk_img);

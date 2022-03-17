@@ -1,5 +1,5 @@
 function [desc, locs] = computeBrief(img, locs_in)
-	load('../data/brief-indices.mat');
+	load("../data/brief-indices.mat");
 	img_width = size(img, 2);
 	img_height = size(img, 1);
 
