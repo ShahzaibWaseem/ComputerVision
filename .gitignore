@@ -1,7 +1,11 @@
 **/data/
+!Assignment\ 4/data/
+**/data_blocks/
+**/output/
 **/.ipynb_checkpoints/**
 *.zip
 *.docx
 *.asv
 *.m~
 3*.pdf
+events*
