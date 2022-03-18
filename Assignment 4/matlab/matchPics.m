@@ -1,7 +1,5 @@
 function [locs1, locs2] = matchPics(I1, I2)
-	% MATCHPICS Extract features, obtain their descriptors, and match them!
-	img1 = I1; img2 = I2;
-
+	%% MATCHPICS Extract features, obtain their descriptors, and match them!
 	%% Convert images to grayscale, if necessary
 	if size(I1, 3) ~= 1
 		I1 = rgb2gray(I1);
@@ -22,12 +20,4 @@ function [locs1, locs2] = matchPics(I1, I2)
 	matchedFeatures = matchFeatures(desc1, desc2, "MatchThreshold", 10.0);
 	locs1 = locs1(matchedFeatures(:,1),:);
 	locs2 = locs2(matchedFeatures(:,2),:);
-
-	%% Displaying matched features
-	fig = figure; ax = axes;
-	showMatchedFeatures(img1, img2, locs1, locs2, "montage", "Parent", ax);
-	legend(ax, "Matched points 1", "Matched points 2");
-	title(ax, "Matched (FAST) features points using BREIF descriptor.");
-	frame = getframe(fig);
-	imwrite(frame2im(frame), "../results/matchPics.png");
 end
