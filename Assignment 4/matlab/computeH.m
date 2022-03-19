@@ -2,7 +2,6 @@ function [H2to1] = computeH(x, x_prime)
 	%% COMPUTEH Computes the homography between two sets of points
 	y = x(:, 2);
 	x = x(:, 1);
-
 	y_p = x_prime(:, 2);
 	x_p = x_prime(:, 1);
 
@@ -12,9 +11,8 @@ function [H2to1] = computeH(x, x_prime)
 		A(2*i-1:2*i, :) = [[-x(i), -y(i), -1, 0, 0, 0, x(i)*x_p(i), y(i)*x_p(i), x_p(i)]; ...
 						   [0, 0, 0, -x(i), -y(i), -1, x(i)*y_p(i), y(i)*y_p(i), y_p(i)]];
 	end
-
 	% Singular Vector (or eigenvector) with lowest corresponding Singular Value (or eigenvalue) is the solution
-	[U, Sig, V] = svd(A);
+	[~, ~, V] = svd(A);
 
 	% MATLAB has the lowest singular vector at the end
 	H2to1 = V(:, end);
