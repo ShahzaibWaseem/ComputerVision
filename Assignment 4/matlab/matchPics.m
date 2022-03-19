@@ -17,7 +17,7 @@ function [locs1, locs2] = matchPics(I1, I2)
 	[desc2, locs2] = computeBrief(I2, features2.Location);
 
 	%% Match features using the descriptors
-	matchedFeatures = matchFeatures(desc1, desc2, "MatchThreshold", 10.0);
-	locs1 = locs1(matchedFeatures(:,1),:);
-	locs2 = locs2(matchedFeatures(:,2),:);
+	matched_features = matchFeatures(desc1, desc2, "MatchThreshold", 10.0);
+	locs1 = locs1(matched_features(:, 1), :);
+	locs2 = locs2(matched_features(:, 2), :);
 end
