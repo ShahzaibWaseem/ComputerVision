@@ -11,6 +11,6 @@ cv_desk = imread("../data/cv_desk.png");
 fig = figure; ax = axes;
 showMatchedFeatures(cv_cover, cv_desk, locs1, locs2, "montage", "Parent", ax);
 legend(ax, "Matched points 1", "Matched points 2");
-title(ax, "Matched (FAST) features points using BREIF descriptor.");
+title(ax, "Matched (FAST) features points using BRIEF descriptor.");
 frame = getframe(fig);
 imwrite(frame2im(frame), "../results/matchPics.png");
