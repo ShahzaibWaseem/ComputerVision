@@ -1,4 +1,4 @@
-%Q2.1.4
+% Q2.1.4
 close all;
 clear all;
 
