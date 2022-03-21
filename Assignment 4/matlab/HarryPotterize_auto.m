@@ -14,10 +14,12 @@ hp_img = imread("../data/hp_cover.jpg");
 
 %% Scale harry potter image to template size
 % Why is this is important?
-scaled_hp_img = imresize(hp_img, [size(cv_img,1) size(cv_img,2)]);
+scaled_hp_img = imresize(hp_img, [size(cv_img, 1) size(cv_img, 2)]);
 
 %% Display warped image.
-imshow(warpH(scaled_hp_img, inv(bestH2to1), size(desk_img)));
+warped_img = imshow(warpH(scaled_hp_img, inv(bestH2to1), size(desk_img)));
+imwrite(getimage(warped_img), "../results/warped.png");
 
 %% Display composite image
-imshow(compositeH(inv(bestH2to1), scaled_hp_img, desk_img));
+composite_img = imshow(compositeH(inv(bestH2to1), scaled_hp_img, desk_img));
+imwrite(getimage(composite_img), "../results/composite.png");
