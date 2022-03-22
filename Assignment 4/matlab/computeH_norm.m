@@ -14,13 +14,14 @@ function [H2to1] = computeH_norm(x, x_prime)
 	scx_prime = sqrt(2) / mean(computeDist(x_prime));
 	x_prime	= x_prime * scx_prime;
 
+	%% https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/41235/versions/1/previews/PTVlab_Beta/compute_homography.m/index.html
 	%% Hnorm = [1/scx 0 -mxx/scx;0 1/scy -myy/scy;0 0 1];
 	%% centriod(1) = x centriod; centroid(2) = y centroid
 	%% similarity transform 1
-	T1 = [scx 0 -centroid1(1)*scx; 0 scx -centroid1(2)*scx; 0 0 1];
+	T1 = [scx 0 -centroid1(1) * scx; 0 scx -centroid1(2) * scx; 0 0 1];
 
 	%% similarity transform 2
-	T2 = [scx_prime 0 -centroid2(1)*scx_prime; 0 scx_prime -centroid2(2)*scx_prime; 0 0 1];
+	T2 = [scx_prime 0 -centroid2(1) * scx_prime; 0 scx_prime -centroid2(2) * scx_prime; 0 0 1];
 
 	%% Compute Homography
 	H = computeH(x, x_prime);
@@ -32,6 +33,6 @@ end
 
 function [dist] = computeDist(points)
 	x_c = points(:, 1); y_c = points(:, 2);
-	dist = x_c.^2 + y_c.^2;
-	dist = dist.^(1/2);
+	dist = x_c .^ 2 + y_c .^ 2;
+	dist = dist .^ (1/2);
 end
