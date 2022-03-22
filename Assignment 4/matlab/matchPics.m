@@ -18,7 +18,7 @@ function [locs1, locs2] = matchPics(I1, I2)
 
 	%% Match features using the descriptors
 	%% MaxRatio default value 0.6 (increase the value to get more hits).
-	matched_features = matchFeatures(desc1, desc2, "MaxRatio", 0.65, "MatchThreshold", 100.0);
+	matched_features = matchFeatures(desc1, desc2, "MaxRatio", 0.8, "MatchThreshold", 100.0);
 	locs1 = locs1(matched_features(:, 1), :);
 	locs2 = locs2(matched_features(:, 2), :);
 end
