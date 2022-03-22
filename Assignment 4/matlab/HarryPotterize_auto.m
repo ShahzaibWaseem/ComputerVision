@@ -1,4 +1,4 @@
-%Q2.2.4
+% Q4.6
 clear all;
 close all;
 
@@ -21,5 +21,5 @@ warped_img = imshow(warpH(scaled_hp_img, inv(bestH2to1), size(desk_img)));
 imwrite(getimage(warped_img), "../results/warped.png");
 
 %% Display composite image
-composite_img = imshow(compositeH(inv(bestH2to1), scaled_hp_img, desk_img));
+composite_img = imshow(compositeH(bestH2to1, scaled_hp_img, desk_img));
 imwrite(getimage(composite_img), "../results/composite.png");
