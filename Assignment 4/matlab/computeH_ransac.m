@@ -1,11 +1,11 @@
 function [bestH2to1, inliers] = computeH_ransac(locs1, locs2)
 	% COMPUTEH_RANSAC A method to compute the best fitting homography given a
 	% list of matching points.
-	% Q2.2.3
+	% Q4.5
 
 	% parameters and intermediate variables
 	max_count = 0;
-	threshold = 10;
+	threshold = 1;
 	iterations = 1000;
 
 	n_points = size(locs1, 1);
@@ -29,6 +29,7 @@ function [bestH2to1, inliers] = computeH_ransac(locs1, locs2)
 			bestlocs = idx;
 		end
 	end
+
 	%% Visualize the best point-pairs.
 	pano_left = imread("../data/pano_left.jpg");
 	pano_right = imread("../data/pano_right.jpg");
