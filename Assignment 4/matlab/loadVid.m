@@ -1,6 +1,6 @@
 function [mov] = loadVid(path)
 	data = VideoReader(path);
-	nFrames = data.NumberOfFrames;
+	nFrames = data.NumFrames;
 	vidHeight = data.Height;
 	vidWidth = data.Width;
 
