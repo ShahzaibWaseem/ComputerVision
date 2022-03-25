@@ -18,9 +18,9 @@ function [bestH2to1, inliers] = computeH_ransac(locs1, locs2)
 	for iter = 1:iterations
 		idx = randperm(size(locs1, 1), 4);		% 4 points required
 		H2to1 = computeH_norm(locs1(idx, :), locs2(idx, :));
-		x_gauss = (H2to1 * locs2_temp')';
-		x_gauss = x_gauss(:, 1:2) ./ x_gauss(:, 3);
-		dist = sqrt(sum((x_gauss-locs1) .^ 2, 2));
+		locs2_gen = (H2to1 * locs2_temp')';
+		locs2_gen = locs2_gen(:, 1:2) ./ locs2_gen(:, 3);
+		dist = sqrt(sum((locs2_gen-locs1) .^ 2, 2));
 
 		if sum(dist < threshold) > max_count
 			bestH2to1 = H2to1;
