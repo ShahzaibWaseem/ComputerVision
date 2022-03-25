@@ -21,5 +21,9 @@ warped_img = imshow(warpH(scaled_hp_img, inv(bestH2to1), size(desk_img)));
 imwrite(getimage(warped_img), "../results/warped.png");
 
 %% Display composite image
+subplot(1, 2, 1);
+imshow(desk_img);
+
+subplot(1, 2, 2);
 composite_img = imshow(compositeH(bestH2to1, scaled_hp_img, desk_img));
 imwrite(getimage(composite_img), "../results/composite.png");
