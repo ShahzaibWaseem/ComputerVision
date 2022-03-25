@@ -14,7 +14,7 @@ function [H2to1] = computeH_norm(x, x_prime)
 	scx_prime = sqrt(2) / mean(computeDist(x_prime));
 	x_prime	= x_prime * scx_prime;
 
-	%% https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/41235/versions/1/previews/PTVlab_Beta/compute_homography.m/index.html
+	%% MathWorks
 	%% Hnorm = [1/scx 0 -mxx/scx;0 1/scy -myy/scy;0 0 1];
 	%% centriod(1) = x centriod; centroid(2) = y centroid
 	%% similarity transform 1
