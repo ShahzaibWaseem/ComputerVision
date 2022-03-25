@@ -6,8 +6,6 @@ cv_cover = imread("../data/cv_cover.jpg");
 cv_desk = imread("../data/cv_desk.png");
 
 [locs1, locs2] = matchPics(cv_cover, cv_desk);
-[H2to1] = computeH(locs1, locs2);
-[H2to1] = computeH_norm(locs1, locs2);
 
 %% Displaying matched features
 fig = figure; ax = axes;
