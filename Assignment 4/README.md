@@ -24,29 +24,25 @@ A planar homography is a warp operation (which is a mapping from pixel coordinat
 
 There exists a homography H that satisfies equation 1 below, given two 3×4 camera projection matrices P1 and P2 corresponding to the two cameras and a plane Π.
 
-```
-x1 ≡ H x2 (1)
-```
-The ≡ symbol stands for identical to or equal up to a scale. The points x1 and x2 are in homogeneous  coordinates, which means they have an additional dimension. If x1 is a 3D vector [xi yi zi]^T, it represents the 2D point [xi/zi yi/zi]^T (called heterogeneous coordinates).
+<img src="https://render.githubusercontent.com/render/math?math=x_1 \equiv H x_2 (1)">
+
+The ≡ symbol stands for identical to or equal up to a scale. The points x1 and x2 are in homogeneous  coordinates, which means they have an additional dimension. If x1 is a 3D vector <img src="https://render.githubusercontent.com/render/math?math=[x_i \quad y_i \quad z_i]^t">, it represents the 2D point <img src="https://render.githubusercontent.com/render/math?math=[x_i/z_i \quad y_i/z_i]^T"> (called heterogeneous coordinates).
 
 This additional dimension is a mathematical convenience to represent transformations (like translation, rotation, scaling, etc) in a concise matrix form. The ≡ means that the equation is correct to a scaling factor.
 
 Note: A degenerate case happens when the plane Π contains both cameras' centers, in which case there are infinite choices of H satisfying equation 1.
 
 ## 3. Direct Linear Transform
-A very common problem in projective geometry is often of the form x ≡ Ay, where x and y are known vectors, and A is a matrix which contains unknowns to be solved. Given matching points in two images, our homography relationship clearly is an instance of such a problem. Note that the equality holds only up to scale (which means that the set of equations are of the form x = λHx′), which is why we cannot use an ordinary least squares solution such as what you may have used in the past to solve simultaneous equations. A standard approach to solve these kinds of problems is called the Direct Linear Transform, where we rewrite the equation as proper homogeneous equations which are then solved in the standard least squares sense. Since this process involves disentangling the structure of the H matrix, it's a transform of the problem into a set of linear equation, thus giving it its name.
+A very common problem in projective geometry is often of the form x ≡ Ay, where x and y are known vectors, and A is a matrix which contains unknowns to be solved. Given matching points in two images, our homography relationship clearly is an instance of such a problem. Note that the equality holds only up to scale (which means that the set of equations are of the form x = λHx'), which is why we cannot use an ordinary least squares solution such as what you may have used in the past to solve simultaneous equations. A standard approach to solve these kinds of problems is called the Direct Linear Transform, where we rewrite the equation as proper homogeneous equations which are then solved in the standard least squares sense. Since this process involves disentangling the structure of the H matrix, it's a transform of the problem into a set of linear equation, thus giving it its name.
 
 Let x1 be a set of points in an image and x2 be the set of corresponding points in an image taken by another camera. Suppose there exists a homography H such that:
 
-```
-xi1 ≡ H xi2 (i∈{1...N})
-```
+<img src="https://render.githubusercontent.com/render/math?math=x^i_1 \equiv H x^i_2 (i \in [1...N])">
 
-where xi1 = [xi1[1] x1i[2] 1]^T  are in homogeneous coordinates, xi1 ∈ x1 and H is a 3 × 3 matrix. For each point pair, this relation can be rewritten as
 
-```
-Aih = 0
-```
+where <img src="https://render.githubusercontent.com/render/math?math=x_1^i = [x_1^i[1]\quad x_1^i[2]\quad 1]^T">  are in homogeneous coordinates, xi1 ∈ x1 and H is a 3 × 3 matrix. For each point pair, this relation can be rewritten as
+
+<img src="https://render.githubusercontent.com/render/math?math=A_ih = 0">
 
 where h is a column vector reshaped from H, and Ai is a matrix with elements derived from the points xi1 and xi2. You can solve for h by finding the right null space by Singular Value Decomposition or Eigen Decomposition as described below.
 
@@ -56,7 +52,7 @@ One way to solve Ax = 0 is to calculate the eigenvector corresponding to the sma
 
 ![](https://lh4.googleusercontent.com/WPu2aHlFEPDQtENT4u4yw2Z39A0fPQbN204wyoFbRpFfDpYZs5EYn8rTu4Dh23JLhWwTUhx81RvT5qpz9SoAXczuhN0BVa36QB-rP8-VGQMgcF0cGPVC8t17pRvhhZjN1jK7UINa)
 
-Using the Matlab function eig, we get the following eigenvalues and eigenvectors:
+Using the Matlab function `eig`, we get the following eigenvalues and eigenvectors:
 
 ![](https://lh4.googleusercontent.com/6uujjCQwYkaUrghHWZPgAqniBlJkhVwKRIPevtfFMpy9Jty0KCFEy-bB4XHIFOik2kOc6TUcYBRxc2n5VO2EZHpdTI9L7dUU_fRV9ftkPfi8FvF_8nJB3_JsMInsZYgYw7gXumEo)
 
@@ -68,9 +64,8 @@ However, h has a dimension of 9. One point correspondence provides 2 constraints
 
 ### 3.2. Singular Value Decomposition
 The Singular Value Decomposition (SVD) of a rectangular matrix A is expressed as:
-```
-A = UΣV T
-```
+
+<img src="https://render.githubusercontent.com/render/math?math=A = U \Sigma V^T">
 
 Here, U is a matrix of column vectors called the "left singular vectors". Similarly, V is called the "right singular vectors". The matrix Σ is a rectangular matrix with off-diagonal elements 0 (or only diagonal elements are non-zero). Each diagonal element σi is called the "singular value" and these are sorted in order of magnitude. In our case, you might see 9 values.
 
@@ -78,7 +73,7 @@ Here, U is a matrix of column vectors called the "left singular vectors". Simila
 - If σ9 ≥ 0, the system is over-determined. A homography exists but not all points fit exactly (they fit in the least-squares error sense). This value represents the goodness of fit. The corresponding right singular vector in V is then the solution we want.
 - Usually, you will have at least four correspondences. If not, the system is under-determined. We will not deal with those here.
 
-The columns of U are eigenvectors of AAT . The columns of V are the eigenvectors of AT A. With this fact, the following holds. If A is not a square matrix, then you can solve `Ah=0` by finding the eigenvector corresponding to the smallest eigenvalue of AT A (instead of SVD if you want).
+The columns of U are eigenvectors of $AA^T$. The columns of V are the eigenvectors of $A^TA$. With this fact, the following holds. If A is not a square matrix, then you can solve Ah=0 by finding the eigenvector corresponding to the smallest eigenvalue of AT A (instead of SVD if you want).
 
 ## 4. Tasks: Computing Planar Homographies
 ### 4.1. Feature Detection, Description, and Matching (3 pts)
@@ -92,7 +87,7 @@ Now implement the following function:
 function [locs1, locs2] = matchPics(I1, I2)
 ```
 
-where I1 and I2 are the images you want to match. locs1 and locs2 are N × 2 matrices containing the x and y coordinates of the matched point pairs. Use the Matlab built-in function `detectFASTFeatures` to compute the features, then build descriptors using the provided computeBrief function and finally compare them using the built-in method `matchFeatures`. Use the function `showMatchedFeatures(im1, im2, locs1, locs2, 'montage')` to visualize your matched points and include the result image in your write-up. An example is shown in Fig. 2.
+where I1 and I2 are the images you want to match. locs1 and locs2 are N × 2 matrices containing the x and y coordinates of the matched point pairs. Use the Matlab built-in function `detectFASTFeatures` to compute the features, then build descriptors using the provided `computeBrief` function and finally compare them using the built-in method `matchFeatures`. Use the function `showMatchedFeatures(im1, im2, locs1, locs2, 'montage')` to visualize your matched points and include the result image in your write-up. An example is shown in Fig. 2.
 
 There is a threshold parameter on `matchFeatures()` that must be tweaked to see things:
 
@@ -127,7 +122,7 @@ Write a function computeH that estimates the planar homography from a set of mat
 function [H2to1] = computeH(x1, x2)  
 ```
 
-x1 and x2 are N × 2 matrices containing the coordinates (x, y) of point pairs between the two images. H2to1 should be a 3 × 3 matrix for the best homography from image 2 to image 1 in the least-square sense. You can use `eig` or `svd` to get the eigenvectors as described above in this handout. For at least one pair of images, pick a certain number of points (say randomly 10 points) from the first image, and show the corresponding locations in the second image after the homography transformation.
+x1 and x2 are N × 2 matrices containing the coordinates (x, y) of point pairs between the two images. `H2to1` should be a 3 × 3 matrix for the best homography from image 2 to image 1 in the least-square sense. You can use `eig` or `svd` to get the eigenvectors as described above in this handout. For at least one pair of images, pick a certain number of points (say randomly 10 points) from the first image, and show the corresponding locations in the second image after the homography transformation.
 
 ### 4.4. Homography Normalization (2 pts)
 Normalization improves numerical stability of the solution and you should always normalize your coordinate data. Normalization has two steps:
@@ -135,27 +130,23 @@ Normalization improves numerical stability of the solution and you should always
 1. Translate the mean of the points to the origin. 
 2. Scale the points so that the average distance to the origin (or you could also try "the largest distance to the origin" to compare) is `sqrt(2)`. This is a linear transformation and can be written as follows:
 
-```
-x'1 = T1 x1
-```
+<center>
+<img src="https://render.githubusercontent.com/render/math?math=x'_1 = T_1 x_1">
 
-```
-x'2 = T2 x2
-```
+<img src="https://render.githubusercontent.com/render/math?math=x'_2 = T_2 x_2">
+</center>
 
-where x'1 and x'2 are the normalized homogeneous coordinates of x1 and x2. T1 and T2 are 3 × 3 matrices. The homography H from x'2 to  x'1 computed by computeH satisfies:
+where $x'_1$ and $x'_2$ are the normalized homogeneous coordinates of $x_1$ and $x_2$. $T_1$ and $T_2$ are 3 × 3 matrices. The homography H from $x'_2$ to $x'_1$ computed by computeH satisfies:
 
-```
-x'1 = H  x'2
-```
+<center>
+<img src="https://render.githubusercontent.com/render/math?math=x'_1 = H x'_2">
+</center>
 
 By substituting x'1 and x'2 with T1 x1 and T2 x2 , we have
 
-```
-T1 x1=H T2 x2
-```
-
-![](https://lh6.googleusercontent.com/YcASV0M_fjghf80K27ca25rZYmAxj_2_JSjO8c3vdZpZ_iGKIhObLd7AuQoidTZKn9kgQycVYdXyWjE5ZTzMaF7jeg0lQqSNrCJ1m9ubUCMDMOqGTdfZtNIMxgd9tRGsSQSIHCXi)
+<center>
+<img src="https://render.githubusercontent.com/render/math?math=T_1 x_1 = H T_2 x_2">
+</center>
 
 By following the above procedure, implement the function computeH_norm:
 
@@ -185,7 +176,7 @@ Write a script HarryPotterize.m that
 4. At this point you should notice that although the image is being warped to the correct location, it is not filling up the same space as the book. Implement the function that modifies `hp_cover.jpg` to fix this issue:
 
 ```matlab
-function [ composite img ] = compositeH(H2to1, template, img)
+function [composite_img] = compositeH(H2to1, template, img)
 ```
 
 ![](https://lh3.googleusercontent.com/fhUJ5UNDf1B-_OhhXZ8SNccIE63RCyP7ifiuOcF7yrFnMto-bnqlTM9DBojuuxIReyjrHY_UzVnspqorltjOYPKRd0KDzLQN-jTX4xyLID6h6TcKVJ20lTLu0VIN2GbGQN4LadRD)
