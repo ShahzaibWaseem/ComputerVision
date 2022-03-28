@@ -2,7 +2,7 @@ function [JL JR bbL bbR] = warp_stereo(IL, IR, TL, TR)
 	% find the smallest bb containining both images
 	bb = mcbb(size(IL), size(IR), TL, TR);
 
-	if bb(3)-bb(1) > 3000 || bb(4)-bb(2) > 3000,
+	if bb(3) - bb(1) > 3000 || bb(4) - bb(2) > 3000,
 		error(["XX Error: Your rectification is not correct."...
 			   "Debug it before going further..."]);
 	end
@@ -41,9 +41,9 @@ function bb = mcbb(s1, s2, H1, H2)
 
 	bb2 = [minx; miny; maxx; maxy];
 
-	q1 = min([bb1';bb2']);
-	q2 = max([bb1';bb2']);
-	bb  = [q1(1:2), q2(3:4)];
+	q1 = min([bb1'; bb2']);
+	q2 = max([bb1'; bb2']);
+	bb = [q1(1:2), q2(3:4)];
 end
 
 function [I2, bb, alpha] = imwarp(I, H, meth, sz)
@@ -57,13 +57,13 @@ function [I2, bb, alpha] = imwarp(I, H, meth, sz)
 	%
 	%	I2 = imwarp(I, H, meth, sz) yield an output image with specific size. sz
 	%	can be:
-	%		- "valid"    Make output image I2 large enough to contain the
+	%		-	"valid"	Make output image I2 large enough to contain the
 	%			entire rotated image.
 	%
-	%		- "same"   Make output image I2 the same size as the input image
+	%		-	"same"	Make output image I2 the same size as the input image
 	%			I, cropping the warped image to fit (default).
 	%
-	%		-  a vector of 4 elements specifying the bounding box
+	%		-	a vector of 4 elements specifying the bounding box
 	%
 	% The output bb is the bounding box of the transformed image in the
 	% coordinate frame of the input image. The first 2 elements of the bb are
@@ -91,9 +91,9 @@ function [I2, bb, alpha] = imwarp(I, H, meth, sz)
 	if strcmp(sz, "same")
 		% same bb as the input image
 		minx = 0;
-		maxx = size(I, 2)-1;
+		maxx = size(I, 2) - 1;
 		miny = 0;
-		maxy = size(I, 1)-1;
+		maxy = size(I, 1) - 1;
 	elseif strcmp(sz, "valid")
 		% compute the smallest bb containing the whole image
 		corners = [0, 0, size(I, 2), size(I, 2);
@@ -116,12 +116,12 @@ function [I2, bb, alpha] = imwarp(I, H, meth, sz)
 
 	bb = [minx; miny; maxx; maxy];
 
-	[x, y] = meshgrid(minx:maxx-1, miny:maxy-1);
+	[x, y] = meshgrid(minx:maxx - 1, miny:maxy - 1);
 
 	pp = p2t(inv(H), [vec(x)';vec(y)']);
 	xi = ivec(pp(1, :)', size(x, 1));
 	yi = ivec(pp(2, :)', size(y, 1));
-	I2 = interp2(0:size(I, 2)-1, 0:size(I, 1)-1, double(I), xi, yi, meth, NaN);
+	I2 = interp2(0:size(I, 2) - 1, 0:size(I, 1) - 1, double(I), xi, yi, meth, NaN);
 
 	if nargout == 3
 		alpha = ~isnan(I2);

@@ -16,5 +16,5 @@ dispM = get_disparity(im1, im2, maxDisp, windowSize);
 depthM = get_depth(dispM, K1n, K2n, R1n, R2n, t1n, t2n);
 
 % display
-figure; imagesc(dispM.*(im1>40)); colormap(gray); axis image;
-figure; imagesc(depthM.*(im1>40)); colormap(gray); axis image;
+figure; imagesc(dispM .* (im1>40)); colormap(gray); axis image;
+figure; imagesc(depthM .* (im1>40)); colormap(gray); axis image;
