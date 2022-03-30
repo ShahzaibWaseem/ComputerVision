@@ -115,7 +115,11 @@ For this part, you need to obtain the Intersection-over-Union (IoU) of the groun
 # Part 3: Instance Segmentation [ 13pts ]
 Having both the detection and the segmentation modules give us the opportunity to also have the instance segmentation results for the dataset. In this regard, you need only to replace the output of your trained object detector instead of the given ground-truth bounding boxes in Part2 and combine the instances of each image to visualize the predicted instance segmentation. We have provided the required functions to convert predicted instance segmentation masks to a CSV file. Visualize 3 samples from the test set of your results (the ground truth mask is not required) and submit the CSV file to Kaggle. Instances could have different intensity as it is shown in the figures, however, using different colors for visualization is recommended.
 
-![](https://lh4.googleusercontent.com/yElRsPv0eXqlzLeDyqHPSd8fxSPSuwlKsUUKVgVW84GcLx25n5lbKiGeKbAij2Opouj3WnJX3jZsXM9RXgzd_7ML2meIaztc7c67HnDPCFjF_iXnMC0N1YbQRUPXWJL4nE1rl017)![](https://lh6.googleusercontent.com/8EkPuxuMsBRYoJALztLfkZBl1VfRo2UMXpRbLGH9kaBWPLwaIvKLWb0D4BAhn0eMSZuubIBP97V5c4yYroYAuigr8snt1dCaeRvd939-zLo-NHv7dZ0mbjYbVhElnOAnPTfEYsrV)![](https://lh6.googleusercontent.com/TmHWmh3tUKMAj6Sn60Re4tEoEdDDl7DZZdOtvnPDXx-jrriih7fjVcsbt3kfItfXPJDhSk0rBPJb9nW14r1b9kKlE_NIWPg4lhdzkUqXauQ6HX9ZoWsrE_RkKy6PQKoreJlpKEOn)
+![](https://lh4.googleusercontent.com/yElRsPv0eXqlzLeDyqHPSd8fxSPSuwlKsUUKVgVW84GcLx25n5lbKiGeKbAij2Opouj3WnJX3jZsXM9RXgzd_7ML2meIaztc7c67HnDPCFjF_iXnMC0N1YbQRUPXWJL4nE1rl017)
+
+![](https://lh6.googleusercontent.com/8EkPuxuMsBRYoJALztLfkZBl1VfRo2UMXpRbLGH9kaBWPLwaIvKLWb0D4BAhn0eMSZuubIBP97V5c4yYroYAuigr8snt1dCaeRvd939-zLo-NHv7dZ0mbjYbVhElnOAnPTfEYsrV)
+
+![](https://lh6.googleusercontent.com/TmHWmh3tUKMAj6Sn60Re4tEoEdDDl7DZZdOtvnPDXx-jrriih7fjVcsbt3kfItfXPJDhSk0rBPJb9nW14r1b9kKlE_NIWPg4lhdzkUqXauQ6HX9ZoWsrE_RkKy6PQKoreJlpKEOn)
 
 A valid submission to Kaggle with higher accuracy than our baseline submission in the public leaderboard (with dice coefficient as the metric) and the visualization of the samples in the report will get 8 marks. The public and private scores of the baseline are very close. The rest of the mark is based on the private leaderboard, which will be published after the deadline. The following table shows the markings based on the relative rankings on the private leaderboard.
 -   Top 10% : 5 pts
