@@ -24,9 +24,9 @@ A planar homography is a warp operation (which is a mapping from pixel coordinat
 
 There exists a homography H that satisfies equation 1 below, given two 3×4 camera projection matrices P1 and P2 corresponding to the two cameras and a plane Π.
 
-<img src="https://render.githubusercontent.com/render/math?math=x_1 \equiv H x_2 (1)">
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}x_1 \equiv H x_2 (1)">
 
-The ≡ symbol stands for identical to or equal up to a scale. The points x1 and x2 are in homogeneous  coordinates, which means they have an additional dimension. If x1 is a 3D vector <img src="https://render.githubusercontent.com/render/math?math=[x_i \quad y_i \quad z_i]^t">, it represents the 2D point <img src="https://render.githubusercontent.com/render/math?math=[x_i/z_i \quad y_i/z_i]^T"> (called heterogeneous coordinates).
+The ≡ symbol stands for identical to or equal up to a scale. The points x1 and x2 are in homogeneous  coordinates, which means they have an additional dimension. If x1 is a 3D vector <img src="https://render.githubusercontent.com/render/math?math=\color{gray}[x_i \quad y_i \quad z_i]^t">, it represents the 2D point <img src="https://render.githubusercontent.com/render/math?math=\color{gray}[x_i/z_i \quad y_i/z_i]^T"> (called heterogeneous coordinates).
 
 This additional dimension is a mathematical convenience to represent transformations (like translation, rotation, scaling, etc) in a concise matrix form. The ≡ means that the equation is correct to a scaling factor.
 
@@ -37,12 +37,12 @@ A very common problem in projective geometry is often of the form x ≡ Ay, wher
 
 Let x1 be a set of points in an image and x2 be the set of corresponding points in an image taken by another camera. Suppose there exists a homography H such that:
 
-<img src="https://render.githubusercontent.com/render/math?math=x^i_1 \equiv H x^i_2 (i \in [1...N])">
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}x^i_1 \equiv H x^i_2 (i \in [1...N])">
 
 
-where <img src="https://render.githubusercontent.com/render/math?math=x_1^i = [x_1^i[1]\quad x_1^i[2]\quad 1]^T">  are in homogeneous coordinates, xi1 ∈ x1 and H is a 3 × 3 matrix. For each point pair, this relation can be rewritten as
+where <img src="https://render.githubusercontent.com/render/math?math=\color{gray}x_1^i = [x_1^i[1]\quad x_1^i[2]\quad 1]^T">  are in homogeneous coordinates, xi1 ∈ x1 and H is a 3 × 3 matrix. For each point pair, this relation can be rewritten as
 
-<img src="https://render.githubusercontent.com/render/math?math=A_ih = 0">
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}A_ih = 0">
 
 where h is a column vector reshaped from H, and Ai is a matrix with elements derived from the points xi1 and xi2. You can solve for h by finding the right null space by Singular Value Decomposition or Eigen Decomposition as described below.
 
@@ -65,7 +65,7 @@ However, h has a dimension of 9. One point correspondence provides 2 constraints
 ### 3.2. Singular Value Decomposition
 The Singular Value Decomposition (SVD) of a rectangular matrix A is expressed as:
 
-<img src="https://render.githubusercontent.com/render/math?math=A = U \Sigma V^T">
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}A = U \Sigma V^T">
 
 Here, U is a matrix of column vectors called the "left singular vectors". Similarly, V is called the "right singular vectors". The matrix Σ is a rectangular matrix with off-diagonal elements 0 (or only diagonal elements are non-zero). Each diagonal element σi is called the "singular value" and these are sorted in order of magnitude. In our case, you might see 9 values.
 
@@ -107,7 +107,7 @@ which computes the BRIEF descriptor for img. locs in is an N × 2 matrix in whic
 
 ### 4.2. BRIEF and Rotations (3 pts)
 
-Let's investigate how BRIEF works with rotations. Write a script briefRotTest.m that:
+Let's investigate how BRIEF works with rotations. Write a script `briefRotTest.m` that:
 
 - Takes the `cv_cover.jpg` and matches it to itself rotated [Hint: use `imrotate`] in increments of 10 degrees.
 - Stores a histogram of the count of matches for each orientation.
@@ -130,23 +130,17 @@ Normalization improves numerical stability of the solution and you should always
 1. Translate the mean of the points to the origin. 
 2. Scale the points so that the average distance to the origin (or you could also try "the largest distance to the origin" to compare) is `sqrt(2)`. This is a linear transformation and can be written as follows:
 
-<center>
-<img src="https://render.githubusercontent.com/render/math?math=x'_1 = T_1 x_1">
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}x'_1 = T_1 x_1">
 
-<img src="https://render.githubusercontent.com/render/math?math=x'_2 = T_2 x_2">
-</center>
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}x'_2 = T_2 x_2">
 
 where $x'_1$ and $x'_2$ are the normalized homogeneous coordinates of $x_1$ and $x_2$. $T_1$ and $T_2$ are 3 × 3 matrices. The homography H from $x'_2$ to $x'_1$ computed by computeH satisfies:
 
-<center>
-<img src="https://render.githubusercontent.com/render/math?math=x'_1 = H x'_2">
-</center>
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}x'_1 = H x'_2">
 
 By substituting x'1 and x'2 with T1 x1 and T2 x2 , we have
 
-<center>
-<img src="https://render.githubusercontent.com/render/math?math=T_1 x_1 = H T_2 x_2">
-</center>
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}T_1 x_1 = H T_2 x_2">
 
 By following the above procedure, implement the function computeH_norm:
 
@@ -168,11 +162,11 @@ function [bestH2to1, inliers] = computeH_ransac(locs1, locs2)
 where bestH2to1 should be the homography H with most inliers found during RANSAC. H will be a homography such that if x2 is a point in locs2 and x1 is a corresponding point in locs1, then x1 ≡ H x2. locs1 and locs2 are N × 2 matrices containing the matched points. inliers is a vector of length N with a 1 at those matches that are part of the consensus set, and 0 elsewhere. Use computeH norm to compute the homography. For at least one pair of images, visualize the 4 point-pairs (that produced the most number of inliers) and the inlier matches that were selected by RANSAC algorithm.
 
 ### 4.6. HarryPotterizing a Book (2 pts)
-Write a script HarryPotterize.m that
+Write a script `HarryPotterize.m` that
 
 1. Reads `cv_cover.jpg`, `cv_desk.png`, and `hp_cover.jpg`.
 2. Computes a homography automatically using `MatchPics` and `computeH_ransac`.
-3. Warps `hp_cover.jpg` to the dimensions of the cv_desk.png image using the provided warpH function.
+3. Warps `hp_cover.jpg` to the dimensions of the `cv_desk.png` image using the provided warpH function.
 4. At this point you should notice that although the image is being warped to the correct location, it is not filling up the same space as the book. Implement the function that modifies `hp_cover.jpg` to fix this issue:
 
 ```matlab
@@ -182,7 +176,7 @@ function [composite_img] = compositeH(H2to1, template, img)
 ![](https://lh3.googleusercontent.com/fhUJ5UNDf1B-_OhhXZ8SNccIE63RCyP7ifiuOcF7yrFnMto-bnqlTM9DBojuuxIReyjrHY_UzVnspqorltjOYPKRd0KDzLQN-jTX4xyLID6h6TcKVJ20lTLu0VIN2GbGQN4LadRD)
 
 ### 5. Creating your Augmented Reality application (2 pts)
-Now with the code you have, you're able to create your own Augmented Reality application. What you're going to do is HarryPotterize the video ar `source.mov` onto the video book.mov. More specifically, you're going to track the computer vision textbook in each frame of book.mov, and overlay each frame of ar `source.mov` onto the book in book.mov. Please write a script ar.m to implement this AR application and save your result video as `ar.avi` in the result/ directory. You may use the function loadVid.m that we provide to load the videos. Your result should be similar to the [LifePrint project](https://www.indiegogo.com/projects/lifeprint-photos-that-come-to-life-in-your-hands-iphone-android). You'll be given full credits if you can put the video together correctly, while it is OK to have strange frames here and there. Also warped images may fluctuate as it is difficult to keep the results exactly temporarily consistent, which is also OK. See Figure 5 for an example frame of what the final video should look like.
+Now with the code you have, you're able to create your own Augmented Reality application. What you're going to do is HarryPotterize the video ar `source.mov` onto the video `book.mov`. More specifically, you're going to track the computer vision textbook in each frame of `book.mov`, and overlay each frame of ar `source.mov` onto the book in `book.mov`. Please write a script `ar.m` to implement this AR application and save your result video as `ar.avi` in the result/ directory. You may use the function `loadVid.m` that we provide to load the videos. Your result should be similar to the [LifePrint project](https://www.indiegogo.com/projects/lifeprint-photos-that-come-to-life-in-your-hands-iphone-android). You'll be given full credits if you can put the video together correctly, while it is OK to have strange frames here and there. Also warped images may fluctuate as it is difficult to keep the results exactly temporarily consistent, which is also OK. See Figure 5 for an example frame of what the final video should look like.
 
 ![](https://lh5.googleusercontent.com/7JRDXg9MSdDrhl_5-hkXjQcwR8ekCkE8Et86Xmn5kR8Vf7H-6wLqoEXgzAK4Hctf7XId-c0TsC9eMFg-ILfSOVfrfDQAHIv-OL84AmezMTRgNRek_i5TKeIMqoY9DViXmA-O5rmL)
 
