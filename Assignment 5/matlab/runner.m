@@ -4,9 +4,8 @@ clear all;
 image1 = imread("../data/im1.png");
 image2 = imread("../data/im2.png");
 
-correspondence = load("../data/someCorresp.mat");
-[pts1, pts2, M] = correspondence;
+corresp = load("../data/someCorresp.mat");
 
-F = eightpoint(pts1, pts2, M);
+F = eightpoint(corresp.pts1, corresp.pts2, corresp.M);
 
 displayEpipolarF(image1, image2, F);
