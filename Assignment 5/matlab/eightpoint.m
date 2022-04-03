@@ -18,7 +18,7 @@ function F = eightpoint(pts1, pts2, M)
 	y_p = pts2(:, 2);
 
 	% 1. Construct the M x 9 matrix A
-	A = [x_p.*x, x_p.*y, x_p, y_p.*x, y_p.*y, y_p, x, y, ones(size(pts, 1), 1)];
+	A = [x_p.*x, x_p.*y, x_p, y_p.*x, y_p.*y, y_p, x, y, ones(size(pts1, 1), 1)];
 
 	% 2. Find the SVD of A
 	[~, ~, V] = svd(A);
@@ -30,10 +30,10 @@ function F = eightpoint(pts1, pts2, M)
 	[U, Sig, V] = svd(F);
 	Sig(3, 3) = 0;
 	F = U * Sig * V';
-	
+
 	F = refineF(F, pts1, pts2);
+
 	% 5. Un-normalize F
 	T = [1/M 0 0; 0 1/M 0; 0 0 1];		% scale
 	F = T' * F * T;
-
 end
