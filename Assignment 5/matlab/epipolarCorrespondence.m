@@ -28,7 +28,7 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
 		least_error = Inf;
 		best_x2 = 0; best_y2 = 0;
 
-		x1 = pts1(1); y1 = pts1(2);
+		x1 = pts1(N, 1); y1 = pts1(N, 2);
 		window_im1 = im1(y1-h:y1+h, x1-h:x1+h);
 
 		x = projections(N, 1); y = projections(N, 2);
