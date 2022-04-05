@@ -10,7 +10,7 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
 	window_size = 11;
 	h = floor(window_size/2);
 	sigma = 5;
-	loop_size = 5;
+	loop_size = 20;
 
 	im1 = rgb2gray(double(im1));
 	im2 = rgb2gray(double(im2));
