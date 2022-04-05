@@ -15,7 +15,7 @@ load("../data/extrinsics.mat", "R1", "R2", "t1", "t2");
 [rectIL, rectIR, bbL, bbR] = warp_stereo(im1, im2, M1, M2);
 
 % Save the rectification parameters
-save("rectify.mat", "M1", "M2", "K1n", "K2n", "R1n", "R2n", "t1n", "t2n");
+save("../data/rectify.mat", "M1", "M2", "K1n", "K2n", "R1n", "R2n", "t1n", "t2n");
 
 % Display
 [rectIL, rectIR, bbL, bbR] = warp_stereo(im1, im2, M1, M2);
