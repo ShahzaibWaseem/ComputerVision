@@ -11,7 +11,7 @@ function P = estimate_pose(x, X)
 	X = X(1, :);
 
 	A = zeros(2 * size(x, 2), 12);
-	for i = 1:size(x)
+	for i = 1:size(x, 2)
 		A(2*i-1:2*i, :) = [[-X(i), -Y(i), -Z(i), -1, 0, 0, 0, 0, X(i) * x(i), Y(i) * x(i), Z(i) * x(i), x(i)]; ...
 						   [0, 0, 0, 0, -X(i), -Y(i), -Z(i), -1, X(i) * y(i), Y(i) * y(i), Z(i) * y(i), y(i)]];
 	end
