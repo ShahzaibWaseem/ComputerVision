@@ -7,13 +7,13 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
 	%		pts1:	coordinates of points in image 1
 	%	Returns:
 	%		pts2:	coordinates of points in image 2
-	window_size = 11;
+	window_size = 17;
 	h = floor(window_size/2);
 	sigma = 5;
 	loop_size = 20;
 
-	im1 = rgb2gray(double(im1));
-	im2 = rgb2gray(double(im2));
+	im1 = im2double(rgb2gray(im1));
+	im2 = im2double(rgb2gray(im2));
 
 	pts2 = zeros(size(pts1));
 	pts1 = [pts1, ones(size(pts1, 1), 1)];
@@ -23,7 +23,6 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
 
 	for N=1:size(pts1, 1)
 		least_error = Inf;
-		best_x2 = 0; best_y2 = 0;
 
 		x1 = pts1(N, 1); y1 = pts1(N, 2);
 		window_im1 = im1(y1-h:y1+h, x1-h:x1+h);
@@ -40,10 +39,9 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
 				error = sqrt(sum(kernel .* (window_im1 - window_im2) .^ 2, "all"));
 				if (error <= least_error)
 					least_error = error;
-					best_x2 = x_i; best_y2 = y_i;
+					pts2(N, :) = [x_i y_i];
 				end
 			end
 		end
-		pts2(N, :) = [best_x2 best_y2];
 	end
 end
