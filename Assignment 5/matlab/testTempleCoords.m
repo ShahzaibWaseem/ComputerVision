@@ -62,8 +62,8 @@ rotate3d on;
 
 % 9. Save your computed rotation matrix (R1, R2) and translation (t1, t2) to the file ../data/extrinsics.mat. These extrinsic parameters will be used in the next section.
 % save extrinsic parameters for dense reconstruction
-R1 = P1(:, 1:3);
-t1 = P1(:, 4);
-R2 = bestP2(:, 1:3);
-t2 = bestP2(:, 4);
+R1 = intrinsic.K1 \ P1(:, 1:3);
+t1 = intrinsic.K1 \ P1(:, 4);
+R2 = intrinsic.K2 \ bestP2(:, 1:3);
+t2 = intrinsic.K2 \ bestP2(:, 4);
 save("../data/extrinsics.mat", "R1", "t1", "R2", "t2");
