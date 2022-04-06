@@ -8,9 +8,9 @@ function [JL JR bbL bbR] = warp_stereo(IL, IR, TL, TR)
 	end
 
 	% Warp LEFT
-	[JL bbL] = imwarp(IL, TL, "bilinear", bb);
+	[JL bbL] = imwarp(IL, TL, 'bilinear', bb);
 	% Warp RIGHT
-	[JR bbR] = imwarp(IR, TR, "bilinear", bb);
+	[JR bbR] = imwarp(IR, TR, 'bilinear', bb);
 end
 
 function bb = mcbb(s1, s2, H1, H2)
@@ -52,7 +52,7 @@ function [I2, bb, alpha] = imwarp(I, H, meth, sz)
 	%	the image I using linear interpolation. The output image I2 has the
 	%	same size of I.
 	%
-	%	I2 = imwarp(I, H, meth) use  method "meth" for interpolation (see interp2
+	%	I2 = imwarp(I, H, meth) use method "meth" for interpolation (see interp2
 	%	for the list of options).
 	%
 	%	I2 = imwarp(I, H, meth, sz) yield an output image with specific size. sz
