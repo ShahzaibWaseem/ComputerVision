@@ -18,7 +18,7 @@ function [K, R, t] = estimate_params(P)
 	R = permutation * R' * permutation;
 
 	% https://ksimek.github.io/2012/08/14/decompose/
-	T = diag(sign(diag(R)));
+	T = diag(sign(diag(R)'));
 
 	K = R * T;
 	R = T * Q;
