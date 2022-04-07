@@ -7,6 +7,7 @@ function [JL JR bbL bbR] = warp_stereo(IL, IR, TL, TR)
 			   "Debug it before going further..."]);
 	end
 
+    % wierd matlab error if bilinear is written in double quotes (???)
 	% Warp LEFT
 	[JL bbL] = imwarp(IL, TL, 'bilinear', bb);
 	% Warp RIGHT
