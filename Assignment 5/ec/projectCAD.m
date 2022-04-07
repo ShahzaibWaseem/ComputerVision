@@ -4,11 +4,6 @@ clear all;
 % 1. Load an image, a CAD model cad, 2D points x and 3D points X from PnP.mat.
 load("../data/PnP.mat", "X", "cad", "image", "x");
 
-size(X)
-size(x)
-size(cad)
-size(image)
-
 % 2. Run estimate_pose and estimate_params to estimate camera matrix P, intrinsic matrix K, rotation matrix R, and translation t.
 P = estimate_pose(x, X);
 [K, R, t] = estimate_params(P);
