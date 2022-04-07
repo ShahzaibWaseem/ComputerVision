@@ -19,8 +19,8 @@ projection = projection(1:2, :) ./ projection(end, :);
 
 % 4. Plot the given 2D points x and the projected 3D points on screen.
 figure; imshow(image,[]); hold on;
-plot(x(1, :), x(2, :), ".b");
-plot(projection(1, :), projection(2, :), "ok", "MarkerSize", 10);
+plot(x(1, :), x(2, :), ".k");
+plot(projection(1, :), projection(2, :), "ob", "MarkerSize", 10);
 hold off;
 
 % 5. Draw the CAD model rotated by your estimated rotation R on screen.
@@ -30,13 +30,9 @@ figure;
 trimesh(cad.faces, rot_cad.vertices(:,1), rot_cad.vertices(:,2), rot_cad.vertices(:,3));
 
 % 6. Project the CAD's all vertices onto the image and draw the projected CAD model overlapping with the 2D image.
-vertices = [cad.vertices ones(size(cad.vertices, 1), 1)];
-vertices = vertices * P';
-vertices = vertices(:, 1:2) ./ vertices(:, end);
+projection = [cad.vertices ones(size(cad.vertices, 1), 1)] * P';
+projection = projection(:, 1:2) ./ projection(:, end);
 
-figure;
-ax = axes;
+figure; ax = axes;
 imshow(image);
-hold on;
-patch(ax, "Faces", rot_cad.faces, "Vertices", vertices, "FaceColor", "yellow", "FaceAlpha", .2, "EdgeColor", "none");
-hold on;
+patch(ax, "Faces", rot_cad.faces, "Vertices", projection, "FaceColor", "Red", "FaceAlpha", 0.3, "EdgeColor", "None");
