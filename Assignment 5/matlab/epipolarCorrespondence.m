@@ -19,7 +19,6 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
 	pts1 = [pts1, ones(size(pts1, 1), 1)];
 
 	kernel = fspecial("gaussian", [window_size, window_size], sigma);
-	% projections = round(cross(epi_lines, [-epi_lines(:, 2), epi_lines(:, 1), epi_lines(:, 2) .* pts1(:, 1) - epi_lines(:, 1) .* pts1(:, 2)]));
 
 	for N=1:size(pts1, 1)
 		least_error = Inf;
