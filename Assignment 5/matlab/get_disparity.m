@@ -10,8 +10,5 @@ function dispM = get_disparity(im1, im2, maxDisp, windowSize)
 		disp = conv2((im1 - im2_shifted) .^ 2, mask, "same");
 		dispM(disp < minDisp) = shift;
 		minDisp = min(minDisp, disp);
-		% if (disp < minDisp)
-		% 	minDisp = disp;
-		% end
 	end
 end
